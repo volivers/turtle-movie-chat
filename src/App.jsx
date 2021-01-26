@@ -1,10 +1,11 @@
 import React from 'react';
+import MoviesList from './components/MoviesList';
 
 const App = () => {
 
   return (
     <main>
-      <h1>Hello world</h1>
+      <MoviesList />
     </main>
   );
 }
