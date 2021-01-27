@@ -76,7 +76,6 @@ const MoviesList = () => {
             ),
             Filter: ({filter, onChange}) => (
               <select onChange={event => onChange(event.target.value)}
-                      style={{ width: "55%" }}
                       value={filter ? filter.value : "all"}>
                       <option value="all">All</option>
                       <option value="action">Action</option>
@@ -106,10 +105,6 @@ const MoviesList = () => {
         ]}
         defaultPageSize={10}
         className="-striped -highlight"
-        style={{
-          width: '75%',
-          height: '50%',
-        }}
       />
     </div>
   );
