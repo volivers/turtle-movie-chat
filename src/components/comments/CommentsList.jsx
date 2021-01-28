@@ -1,11 +1,13 @@
 import React from 'react';
+import Comment from './Comment';
 import Dialog from '@material-ui/core/Dialog';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import Slide from '@material-ui/core/Slide';
 import Typography from '@material-ui/core/Typography';
-import DialogActions from '@material-ui/core/DialogActions';
 import DialogContent from '@material-ui/core/DialogContent';
+import List from '@material-ui/core/List';
+import DialogActions from '@material-ui/core/DialogActions';
 import InputBase from '@material-ui/core/InputBase';
 import Fab from '@material-ui/core/Fab';
 import IconButton from '@material-ui/core/IconButton';
@@ -25,8 +27,7 @@ const CommentsList = ({ open, setOpen, movie }) => {
   };
 
   return (
-    <div>
-      <Dialog fullScreen open={open} onClose={handleCloseModal} TransitionComponent={Transition}>
+      <Dialog open={open} onClose={handleCloseModal} TransitionComponent={Transition}>
         <AppBar className={classes.appBar}>
           <Toolbar>
             <IconButton edge="start" color="inherit" onClick={handleCloseModal} aria-label="close">
@@ -36,16 +37,20 @@ const CommentsList = ({ open, setOpen, movie }) => {
           </Toolbar>
         </AppBar>
         <DialogContent dividers>
-
+          <List>
+            <Comment />
+            <Comment />
+            <Comment />
+            <Comment />
+          </List>
         </DialogContent>
-        <DialogActions>
-          <InputBase fullWidth placeholder="Write your comment here" aria-label="input-comment" />
+        <DialogActions className={classes.actions}>
+          <InputBase className={classes.input} placeholder="Write your comment here" aria-label="input-comment" />
           <Fab color="primary" aria-label="add" size="large" className={classes.btnFav} onClick={handleCloseModal}>
             <SendIcon />
           </Fab>
         </DialogActions>
       </Dialog>
-    </div>
   );
 }
 
