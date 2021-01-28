@@ -10,15 +10,16 @@ export default makeStyles((theme) => ({
     letterSpacing: '1em',
     fontWeight: 'lighter',
   },
-  actions: {
+  form: {
     display: 'flex',
-    justifyContent: 'space-between'
+    justifyContent: 'space-between',
+    padding: '10px 0'
   },
   input: {
     width: '500px',
-    marginLeft: '10px'
+    marginLeft: '15px'
   },
   btnFav: {
-    margin: '0 10px'
+    margin: '0 15px'
   }
 }));

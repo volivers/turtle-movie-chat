@@ -1,4 +1,7 @@
-import React from 'react';
+import React, { useState } from 'react';
+import firebase from 'firebase/app';
+import { firestore } from "../../config/firebase";
+import { useCollectionData } from 'react-firebase-hooks/firestore';
 import Comment from './Comment';
 import Dialog from '@material-ui/core/Dialog';
 import AppBar from '@material-ui/core/AppBar';
@@ -7,7 +10,6 @@ import Slide from '@material-ui/core/Slide';
 import Typography from '@material-ui/core/Typography';
 import DialogContent from '@material-ui/core/DialogContent';
 import List from '@material-ui/core/List';
-import DialogActions from '@material-ui/core/DialogActions';
 import InputBase from '@material-ui/core/InputBase';
 import Fab from '@material-ui/core/Fab';
 import IconButton from '@material-ui/core/IconButton';
@@ -22,9 +24,25 @@ const Transition = React.forwardRef(function Transition(props, ref) {
 const CommentsList = ({ open, setOpen, movie }) => {
   const classes = useStyles();
 
+  const commentsRef = firestore.collection('comments');
+  const query = commentsRef.where("movie", "==", movie);
+  const [comments] = useCollectionData(query, { idField: 'id' });
+
   const handleCloseModal = () => {
     setOpen(false);
   };
+
+  const [formValue, setFormValue] = useState('');
+
+  const sendComment = async (e) => {
+    e.preventDefault();
+    await commentsRef.add({
+      text: formValue,
+      createdAt: firebase.firestore.FieldValue.serverTimestamp(),
+      movie
+    })
+    setFormValue('');    
+  }
 
   return (
       <Dialog open={open} onClose={handleCloseModal} TransitionComponent={Transition}>
@@ -38,18 +56,21 @@ const CommentsList = ({ open, setOpen, movie }) => {
         </AppBar>
         <DialogContent dividers>
           <List>
-            <Comment />
-            <Comment />
-            <Comment />
-            <Comment />
+            {comments && comments.map(comment => <Comment key={comment.id} comment={comment} movie={movie} />)}
           </List>
         </DialogContent>
-        <DialogActions className={classes.actions}>
-          <InputBase className={classes.input} placeholder="Write your comment here" aria-label="input-comment" />
-          <Fab color="primary" aria-label="add" size="large" className={classes.btnFav} onClick={handleCloseModal}>
+        <form className={classes.form} onSubmit={sendComment}>
+          <InputBase
+              value={formValue}
+              className={classes.input}
+              placeholder="Write your comment here"
+              aria-label="input-comment"
+              onChange={(e) => setFormValue(e.target.value)}
+          />
+          <Fab color="primary" aria-label="add" size="large" className={classes.btnFav} onClick={sendComment}>
             <SendIcon />
           </Fab>
-        </DialogActions>
+        </form>
       </Dialog>
   );
 }
