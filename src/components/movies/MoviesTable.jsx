@@ -1,16 +1,30 @@
 import React, { useState, useEffect } from 'react';
-import data from '../data/movies.json';
+import data from '../../data/movies.json';
 import ReactTable from 'react-table-v6';
 import 'react-table-v6/react-table.css';
 import { matchSorter } from 'match-sorter';
+import CommentsList from '../comments/CommentsList';
+import TrendingUpIcon from '@material-ui/icons/TrendingUp';
+import TrendingFlatIcon from '@material-ui/icons/TrendingFlat';
+import TrendingDownIcon from '@material-ui/icons/TrendingDown';
+import useStyles from '../../styles/MoviesTableStyles';
 
-const MoviesList = () => {
+const MoviesTable = () => {
+  const classes = useStyles();
 
   const [movies, setMovies] = useState([]);
 
   useEffect(() => {
     setMovies(data);
   },[])
+
+  const [open, setOpen] = useState(false);
+  const [selectedMovie, setSelectedMovie] = useState([]);
+
+  const handleOpenModal = (row) => {
+    setOpen(true);
+    setSelectedMovie(row)
+  };
 
   return (
     <div>
@@ -24,6 +38,7 @@ const MoviesList = () => {
             headerStyle: {textAlign: 'left'},
             accessor: "title",
             width: 300,
+            className: classes.root,
             filterable: true,
             Filter: ({filter, onChange}) => (
               <input type='text'
@@ -39,13 +54,15 @@ const MoviesList = () => {
             Header: "Year",
             headerStyle: {textAlign: 'left'},
             accessor: "year",
-            maxWidth: 150
+            maxWidth: 150,
+            className: classes.root,
           },
           {
             Header: "Runtime",
             headerStyle: {textAlign: 'left'},
             accessor: "runtime",
             maxWidth: 150,
+            className: classes.root,
             Cell: row => (
               row.value ? <span>{Math.floor(row.value / 60)}h {row.value % 60}min</span> : '-'
             )
@@ -55,6 +72,7 @@ const MoviesList = () => {
             headerStyle: {textAlign: 'left'},
             accessor: "revenue",
             maxWidth: 150,
+            className: classes.root,
             Cell: row => (
               row.value ? <span>${row.value} M</span> : '-'
             )
@@ -63,13 +81,20 @@ const MoviesList = () => {
             Header: "Rating",
             headerStyle: {textAlign: 'left'},
             accessor: "rating",
-            maxWidth: 150
+            maxWidth: 150,
+            className: classes.root,
+            Cell: row => (
+              Math.floor(row.value) === 5 ? <span><TrendingFlatIcon className={classes.trendingFlat}/> {row.value}</span>
+                : row.value > 5 ? <span><TrendingUpIcon className={classes.trendingUp}/> {row.value}</span>
+                : <span><TrendingDownIcon className={classes.trendingDown}/> {row.value}</span>
+            )
           },
           {
             Header: "Genres",
             headerStyle: {textAlign: 'left'},
             accessor: "genre",
             width: 300,
+            className: classes.root,
             filterable: true,
             Cell: row => (
               row.value ? <span>{(row.value).join(", ")}</span> : '-'
@@ -103,11 +128,18 @@ const MoviesList = () => {
             filterAll: true
           }
         ]}
+        getTrProps={(state, rowInfo) => {
+          return {
+            onClick: () =>
+              handleOpenModal(rowInfo.original)
+          };
+        }}
         defaultPageSize={10}
         className="-striped -highlight"
       />
+      <CommentsList open={open} setOpen={setOpen} movie={selectedMovie} />
     </div>
   );
 }
 
-export default MoviesList;
+export default MoviesTable;

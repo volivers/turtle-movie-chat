@@ -1,7 +1,7 @@
 import React from 'react';
 import './App.scss';
 import NavBar from './components/common/NavBar';
-import MoviesList from './components/MoviesList';
+import MoviesTable from './components/movies/MoviesTable';
 import Footer from './components/common/Footer';
 
 const App = () => {
@@ -11,7 +11,7 @@ const App = () => {
       <NavBar />
       <div className="list-wrapper">
         <h1>Best movies of all time</h1>
-        <MoviesList />
+        <MoviesTable />
       </div>
       <Footer />
     </main>
