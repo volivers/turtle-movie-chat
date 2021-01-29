@@ -44,33 +44,33 @@ const CommentsList = ({ open, setOpen, movie, user }) => {
   }
 
   return (
-      <Dialog className="chat-wrapper" open={open} onClose={handleCloseModal} TransitionComponent={Transition}>
-        <AppBar className={classes.appBar}>
-          <Toolbar>
-            <IconButton edge="start" color="inherit" onClick={handleCloseModal} aria-label="close">
-              <ArrowBackIcon />
-            </IconButton>
-            <p className={classes.title}>{movie.title} Comments</p>
-          </Toolbar>
-        </AppBar>
-        <DialogContent dividers>
-          <List>
-            {comments && comments.map(comment => <Comment key={comment.id} comment={comment} movie={movie} user={user} />)}
-          </List>
-        </DialogContent>
-        <form className={classes.form} onSubmit={sendComment}>
-          <InputBase
-              value={formValue}
-              className={classes.input}
-              placeholder="Write your comment here"
-              aria-label="input-comment"
-              onChange={(e) => setFormValue(e.target.value)}
-          />
-          <Fab color="primary" aria-label="add" size="large" className={classes.btnFav} onClick={sendComment}>
-            <SendIcon />
-          </Fab>
-        </form>
-      </Dialog>
+    <Dialog open={open} onClose={handleCloseModal} TransitionComponent={Transition}>
+      <AppBar className={classes.appBar}>
+        <Toolbar>
+          <IconButton edge="start" color="inherit" onClick={handleCloseModal} aria-label="close">
+            <ArrowBackIcon />
+          </IconButton>
+          <p className={classes.title}>{movie.title} Comments</p>
+        </Toolbar>
+      </AppBar>
+      <DialogContent dividers>
+        <List className={classes.chatWrapper}>
+          {comments && comments.map(comment => <Comment key={comment.id} comment={comment} movie={movie} user={user} />)}
+        </List>
+      </DialogContent>
+      <form className={classes.form} onSubmit={sendComment}>
+        <InputBase
+            value={formValue}
+            className={classes.input}
+            placeholder="Write your comment here"
+            aria-label="input-comment"
+            onChange={(e) => setFormValue(e.target.value)}
+        />
+        <Fab color="primary" aria-label="add" size="large" className={classes.btnFav} onClick={sendComment}>
+          <SendIcon />
+        </Fab>
+      </form>
+    </Dialog>
   );
 }
 

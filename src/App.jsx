@@ -10,7 +10,6 @@ import Footer from './components/common/Footer';
 const App = () => {
   
   const [user] = useAuthState(auth);
-  console.log(user);
 
   return (
     <main>

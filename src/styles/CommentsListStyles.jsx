@@ -10,6 +10,9 @@ export default makeStyles((theme) => ({
     letterSpacing: '1em',
     fontWeight: 'lighter',
   },
+  chatWrapper: {
+    height: '50vh',
+  },
   form: {
     display: 'flex',
     justifyContent: 'space-between',

@@ -7,9 +7,6 @@ export default makeStyles((theme) => ({
       transform: 'scale(1.01)'
     }
   },
-  avatar: {
-    backgroundColor: '#3f51b5'
-  },
   comment: {
     backgroundColor: '#3f51b5',
     color: '#fff',
