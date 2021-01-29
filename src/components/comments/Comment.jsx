@@ -6,7 +6,7 @@ import PersonIcon from '@material-ui/icons/Person';
 import ListItemText from '@material-ui/core/ListItemText';
 import useStyles from '../../styles/CommentStyles';
 
-const Comment = ({ comment, movie }) => {
+const Comment = ({ comment, movie, user }) => {
   const classes = useStyles();
 
   return (
@@ -17,6 +17,7 @@ const Comment = ({ comment, movie }) => {
         </Avatar>
       </ListItemAvatar>
       <ListItemText className={classes.comment} primary={comment.text} />
+      {user.displayName}
     </ListItem>
   );
 };

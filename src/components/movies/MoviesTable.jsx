@@ -9,11 +9,10 @@ import TrendingFlatIcon from '@material-ui/icons/TrendingFlat';
 import TrendingDownIcon from '@material-ui/icons/TrendingDown';
 import useStyles from '../../styles/MoviesTableStyles';
 
-const MoviesTable = () => {
+const MoviesTable = ({ user }) => {
   const classes = useStyles();
 
   const [movies, setMovies] = useState([]);
-
   useEffect(() => {
     setMovies(data);
   },[])
@@ -137,7 +136,7 @@ const MoviesTable = () => {
         defaultPageSize={10}
         className="-striped -highlight"
       />
-      <CommentsList open={open} setOpen={setOpen} movie={selectedMovie} />
+      <CommentsList open={open} setOpen={setOpen} movie={selectedMovie} user={user} />
     </div>
   );
 }

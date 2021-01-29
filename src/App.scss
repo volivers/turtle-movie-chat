@@ -10,17 +10,6 @@
   display: flex;
   justify-content: center;
 
-  nav {
-    .logo {
-      margin-left: auto;
-    }
-    p {
-      color: #fff;
-      text-transform: uppercase;
-      letter-spacing: 1em;
-    }
-  }
-
   .list-wrapper {
     display: flex;
     flex-direction: column;
@@ -37,6 +26,10 @@
     }
   }
 
+  .chat-wrapper {
+    height: 100px;
+  }
+
   footer {
     width: 100%;
     display: flex;
@@ -48,7 +41,7 @@
     padding-bottom: 15px;
 
     .footer-links {
-      margin-left: 50px;
+      margin-left: 35px;
       a {
         color: #3f51b5;
         text-decoration: none;
@@ -63,7 +56,7 @@
       text-transform: uppercase;
       letter-spacing: 0.5rem;
       text-align: right;
-      margin-right: 50px;
+      margin-right: 25px;
     }
   }
 }
