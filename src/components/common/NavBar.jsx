@@ -19,7 +19,7 @@ const NavBar = ({ user }) => {
             <p className={classes.title}>Hello, {user.displayName}.</p>
             : <p className={classes.title}>Welcome, please sign in.</p>
           }
-          {user && <SignOut className={classes.signOutBtn} />}
+          <SignOut className={classes.signOutBtn} />
         </Toolbar>
       </AppBar>
     </nav>
