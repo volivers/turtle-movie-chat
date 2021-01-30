@@ -1,70 +1,120 @@
-# Getting Started with Create React App
+# Turtle Movie Chat
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+> Movie listing and real-time commenting React app, using [Firebase](https://firebase.google.com/) to power the authentication and commenting backend.
+> This project was created with [Material-UI](https://material-ui.com/) and used as trial for [Turtle](https://www.turtle.dev/).
 
-## Available Scripts
+## Live version
 
-In the project directory, you can run:
+The live version is available at: <https://turtle-mov.firebaseapp.com/>
 
-### `yarn start`
+## Running
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+This project was created using [CRA](https://github.com/facebook/create-react-app).
+To run the code, first install all the packages needed with:
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+`npm install`
 
-### `yarn test`
+After the installation, start the project executing the command:
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+`npm start`
 
-### `yarn build`
+It will open [http://localhost:3000](http://localhost:3000) (default),
+so you can view the project in the browser.
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+## Features
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+This project was built upon 3 main features: User Authentication, Movies Table and Comments Chat.
+After breaking them down, a user is able to:
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+1. User Authentication
+    * Sign in
+    * Sign out
+2. Movies Table
+    * List all movies
+    * Filter movies by title and genre
+    * Sort movies according to collumn
+    * Select a movie to start commenting
+3. Comments Chat
+    * List all comments
+    * Send a new comment
 
-### `yarn eject`
+The User Authentication was handled by [Firebase](https://firebase.google.com/), as well as the real-time commenting system.
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+Regarding the UI, all the features were implemented using the [Material-UI](https://material-ui.com/) framework except the Movies Table.
+For this feature, in particular, the [React Table](https://react-table.tanstack.com/) was used to match the original designs and filtering system.
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+It should be noted that neither App Navigation nor State Management were included as features,
+since this was a trial project not meant to be scaled.
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+### Demo
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
 
-## Learn More
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+## Architecture
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+The project was architectured in the following way:
 
-### Code Splitting
+### /src
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+The `/src` contains all the React codebase, as well as the `App.scss` overall stylesheet.
 
-### Analyzing the Bundle Size
+```
+.
+├── components
+│   ├── authentication
+│   │   ├── SignIn.jsx
+│   │   └── SignOut.jsx
+│   ├── comments
+│   │   ├── Comment.jsx
+│   │   └── CommentsList.jsx
+│   ├── common
+│   │   ├── Footer.jsx
+│   │   ├── Logo.jsx
+│   │   └── NavBar.jsx
+│   └── movies
+│       └── MoviesTable.jsx
+├── data
+│   └── movies.json
+├── services
+│   └── firebase.jsx
+├── styles
+│   ├── CommentsListStyles.jsx
+│   ├── CommentStyles.jsx
+│   ├── MoviesTableStyles.jsx
+│   └── NavBarStyles.jsx
+├── App.jsx
+├── App.scss
+└── index.jsx
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+```
 
-### Making a Progressive Web App
+#### /components
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+This folder includes all the components used to build this project, dumb and smart ones.
+While the dumb components used were clustered at the `/common` folder, smart components were
+arranged according to the their features at `/authentication`, `/comments` and `/movies`.
 
-### Advanced Configuration
+#### /data
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+It contains the movies data used to feed this project. 
 
-### Deployment
+#### /services
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+It includes the Firebase API configuration file needed for both the Authentication and Cloud Firestore.
 
-### `yarn build` fails to minify
+#### /styles
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+Since the components were styled using Material-UI’s styling solution and best practises,
+their files were clustered at the `/styles` folder. This way, the components’ logic and styles
+are cleanly separate.
+
+## What to improve?
+
+* Unit testing for components
+* State management with Redux or Context
+* Features to update, like/dislike and delete comments
+* Authentication using email and password
+* Firestore rules to ban users for using offensive language
+* Styling and overall UX/UI designs
+
+Any bug reports are welcome. Thank you!
