@@ -54,7 +54,7 @@ since this was a trial project not meant to be scaled.
 
 The project was architectured in the following way:
 
-### /src
+### `/src`
 
 The `/src` contains all the React codebase, as well as the `App.scss` overall stylesheet.
 
@@ -88,21 +88,21 @@ The `/src` contains all the React codebase, as well as the `App.scss` overall st
 
 ```
 
-#### /components
+#### `/components`
 
 This folder includes all the components used to build this project, dumb and smart ones.
 While the dumb components used were clustered at the `/common` folder, smart components were
 arranged according to the their features at `/authentication`, `/comments` and `/movies`.
 
-#### /data
+#### `/data`
 
 It contains the movies data used to feed this project. 
 
-#### /services
+#### `/services`
 
 It includes the Firebase API configuration file needed for both the Authentication and Cloud Firestore.
 
-#### /styles
+#### `/styles`
 
 Since the components were styled using Material-UI’s styling solution and best practises,
 their files were clustered at the `/styles` folder. This way, the components’ logic and styles
@@ -113,7 +113,6 @@ are cleanly separate.
 * Unit testing for components
 * State management with Redux or Context
 * Features to update, like/dislike and delete comments
-* Authentication using email and password
 * Firestore rules to ban users for using offensive language
 * Styling and overall UX/UI designs
 
