@@ -48,7 +48,7 @@ since this was a trial project not meant to be scaled.
 
 ### Demo
 
-
+![Demo](https://s2.gifyu.com/images/demo_turtle-movie-chat.gif)
 
 ## Architecture
 
