@@ -32,7 +32,7 @@ After breaking them down, a user is able to:
 2. Movies Table
     * List all movies
     * Filter movies by title and genre
-    * Sort movies according to collumn
+    * Sort movies according to column
     * Select a movie to start commenting
 3. Comments Chat
     * List all comments
